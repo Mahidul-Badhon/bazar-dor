@@ -10,7 +10,7 @@ const NavLinks = async () => {
 
     const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories")
     const data:IngredientCategory[] = await res.json()
-    console.log(data)
+    // console.log(data)
     return (
         <div className="flex max-w-6xl mx-auto gap-6 my-3">
             {

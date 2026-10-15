@@ -1,14 +1,45 @@
 import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
 import Image from "next/image";
+import up from "@/assets/triangle (1).png"
+import down from "@/assets/down-arrows.png"
+import ProductsCard from "@/components/ProductsCard";
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products")
+  const data = await res.json()
+  console.log(data)
+
+  const topRisenProducts = data
+    .filter((item) => item.change?.dir === "up")
+    .sort((a, b) => (b.change?.pct ?? 0) - (a.change?.pct ?? 0))
+    .slice(0, 6);
+  
   return (
     <div>
       <Marquee></Marquee>
       <Banner></Banner>
+      <div>
+        {/* price increased */}
+        <div className="mt-8 container mx-auto">
+          <div className="flex items-center gap-2">
+            <span>
+              <Image width={14} height={14} src={up} alt="price incresead"></Image>
+            </span>
+            <h2 className="font-bold text-3xl">আজ দাম বেড়েছে</h2>
+          </div>
+
+          {/* for card */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {topRisenProducts.map((product) => (
+              <ProductsCard key={product.id} product={product} />
+            ))}
+          </div>
+
+        </div>
+      </div>
       <p>THis is home</p>
-      
+
     </div>
   );
 }
