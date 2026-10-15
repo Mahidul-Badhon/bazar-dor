@@ -1,5 +1,6 @@
 import logo from "@/assets/logo-icon.png"
 import Image from "next/image";
+import NavLinks from "./NavLinks";
 const Header = () => {
 
     const date = new Date().toLocaleDateString("bn-bd",
@@ -9,6 +10,7 @@ const Header = () => {
     )
 
     return (
+        <div>
         <div className="flex justify-between mt-2 py-3 container mx-auto">
             <div className="flex gap-2">
                 <div className="bg-green-500 rounded-md">
@@ -25,8 +27,10 @@ const Header = () => {
                 <button className="btn border-0">সাইন ইন</button>
                 <button className="btn btn-success mx-1.5 text-white">সাইন আপ</button>
             </div>
-
+            </div>
+        <NavLinks></NavLinks>
         </div>
+        
     );
 };
 
