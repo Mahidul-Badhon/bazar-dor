@@ -22,7 +22,7 @@ const Marquee = async () => {
 
 
     return (
-        <div className="border border-gray-200">
+        <div className="border border-gray-200 bg-white">
             <MarqueeText direction="right" duration={20}>
                 {
                     data.map(

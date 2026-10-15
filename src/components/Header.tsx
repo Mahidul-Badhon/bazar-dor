@@ -10,7 +10,7 @@ const Header = () => {
     )
 
     return (
-        <div>
+        <div className="bg-white">
         <div className="flex justify-between mt-2 py-3 container mx-auto">
             <div className="flex gap-2">
                 <div className="bg-green-500 rounded-md">
