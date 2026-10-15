@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import upIcon from "@/assets/triangle (1).png"; // Or use ▲
+import upIcon from "@/assets/triangle (1).png";
+import down from "@/assets/down-arrows.png"
 
-const toBnDigit = (num) => {
+const toBnDigit = (num: string) => {
   const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   return num
     ?.toString()
@@ -51,9 +52,31 @@ const ProductsCard = ({ product }) => {
 
         {/* Change Indicator Badge */}
         {product?.change && (
-          <div className="flex items-center gap-1 bg-[#FDE8E8] text-[#E02424] px-2.5 py-1 rounded-full text-xs font-bold">
-            <span className="text-[10px]">▲</span>
-            <span>{toBnDigit(product.change?.pct)}%</span>
+          <div
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${product.change.dir === "up"
+                ? "bg-red-100 text-red-600"
+                : product.change.dir === "down"
+                  ? "bg-green-100 text-green-600"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+          >
+            <Image
+              src={
+                product.change.dir === "up"
+                  ? upIcon
+                  : down
+              }
+              alt={
+                product.change.dir === "up"
+                  ? "Price increased"
+                  : "Price decreased"
+              }
+              width={12}
+              height={12}
+              className="object-contain"
+            />
+            
+            <span>{toBnDigit(`${Math.abs(product.change.pct)}`)}%</span>
           </div>
         )}
       </div>

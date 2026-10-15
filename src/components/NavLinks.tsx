@@ -15,7 +15,7 @@ const NavLinks = async () => {
         <div className="flex max-w-6xl mx-auto gap-6 my-3">
             {
                 data.map(
-                    (n) => <Link key={n.id} href={n.slug}>
+                    (n) => <Link key={n.id} href={`/category/${n.slug}`}>
                         <span className="mx-1.5">{n.icon}</span>
                         {n.nameBn}
                     </Link>)

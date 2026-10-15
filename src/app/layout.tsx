@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Marquee from "@/components/Marquee";
 
 const hindShiliguri = Hind_Siliguri({
   weight: '300',
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Header></Header>
+        <Marquee></Marquee>
         {children}
         </body>
     </html>
