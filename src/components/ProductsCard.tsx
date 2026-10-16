@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import upIcon from "@/assets/triangle (1).png";
 import down from "@/assets/down-arrows.png"
+import Link from "next/link";
 
 const toBnDigit = (num: string) => {
   const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -18,8 +19,9 @@ const ProductsCard = ({ product }) => {
     if (unit === "piece" || unit === "pcs") return "প্রতি পিস";
     return `প্রতি ${unit}`;
   };
-
+  console.log(product.id)
   return (
+    <Link href={`/product/${product.id}`}>
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
       {/* Top: Icon + Title & Unit */}
       <div className="flex items-center gap-3">
@@ -81,6 +83,8 @@ const ProductsCard = ({ product }) => {
         )}
       </div>
     </div>
+    </Link>
+    
   );
 };
 

@@ -4,7 +4,7 @@
 import { useState } from "react";
 import ProductsCard from "./ProductsCard";
 
-type Product = {
+interface Product {
   id: number;
   slug: string;
   nameBn: string;
@@ -21,7 +21,7 @@ type Product = {
   };
 };
 
-type Props = {
+interface Props {
   products: Product[];
 };
 

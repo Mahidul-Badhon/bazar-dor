@@ -2,17 +2,36 @@
 import SortedProducts from '@/components/SortedProducts';
 import Image from 'next/image';
 
-const toBnDigit = (num: string) => {
+interface Product {
+  id: number;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  today: number;
+  image:string;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: {
+    dir: "up" | "down";
+    pct: number;
+  };
+};
+
+
+const toBnDigit = (num: number | string): string => {
   const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   return num
     ?.toString()
     .replace(/[0-9]/g, (d) => bnDigits[parseInt(d, 10)]);
 };
 
-const CategoryProducts = async({params}) => {
+const CategoryProducts = async({params}:{params: {categoryId:string}}) => {
     const {categoryId} = await params
     const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`)
-    const data = await res.json()
+    const data: Product[] = await res.json()
     const category = data[0]
     console.log(data)
     
