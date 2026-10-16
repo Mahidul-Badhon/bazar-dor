@@ -19,7 +19,7 @@ const ProductsCard = ({ product }) => {
     if (unit === "piece" || unit === "pcs") return "প্রতি পিস";
     return `প্রতি ${unit}`;
   };
-  console.log(product.id)
+  // console.log(product.id)
   return (
     <Link href={`/product/${product.id}`}>
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition-shadow">

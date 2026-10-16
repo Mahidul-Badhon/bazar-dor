@@ -2,6 +2,7 @@ import logo from "@/assets/logo-icon.png"
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import Link from "next/link";
+import UserInfo from "./UserInfo";
 const Header = () => {
 
     const date = new Date().toLocaleDateString("bn-bd",
@@ -26,10 +27,7 @@ const Header = () => {
             </div>
 </Link>
 
-            <div>
-                <button className="btn border-0">সাইন ইন</button>
-                <button className="btn btn-success mx-1.5 text-white">সাইন আপ</button>
-            </div>
+            <UserInfo></UserInfo>
             </div>
         <NavLinks></NavLinks>
         </div>
