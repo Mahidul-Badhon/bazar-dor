@@ -78,7 +78,6 @@ export default async function Home() {
         </div> 
 
       </div>
-      <p>THis is home</p>
 
     </div>
   );

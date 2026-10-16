@@ -75,9 +75,9 @@ const Productpage = async ({ params }: ProductPageProps) => {
   const averagePrice =
     data.markets.length > 0
       ? data.markets.reduce(
-          (total, market) => total + (market.min + market.max) / 2,
-          0
-        ) / data.markets.length
+        (total, market) => total + (market.min + market.max) / 2,
+        0
+      ) / data.markets.length
       : 0;
 
   return (
@@ -123,9 +123,8 @@ const Productpage = async ({ params }: ProductPageProps) => {
           </p>
 
           <p
-            className={`mt-2 flex items-center gap-1 text-lg font-bold ${
-              priceWentUp ? "text-red-500" : "text-green-600"
-            }`}
+            className={`mt-2 flex items-center gap-1 text-lg font-bold ${priceWentUp ? "text-red-500" : "text-green-600"
+              }`}
           >
             <Image
               src={priceWentUp ? upIcon : down}
@@ -187,163 +186,110 @@ const Productpage = async ({ params }: ProductPageProps) => {
           বাজারভিত্তিক আজকের দাম
         </h2>
 
-{/*
-        <div className="overflow-x-auto rounded-[20px] border border-[#dce6dd]">
-          <table className="w-full min-w-[650px] border-collapse text-left text-sm sm:text-base">
-            <thead className="bg-[#f9fcf9] text-[#737c74]">
-              <tr>
-                <th className="px-5 py-4 font-bold">বাজার</th>
-                <th className="px-5 py-4 font-bold">বিভাগ</th>
-                <th className="px-5 py-4 text-right font-bold">সর্বনিম্ন</th>
-                <th className="px-5 py-4 text-right font-bold">সর্বাধিক</th>
-                <th className="px-5 py-4 text-right font-bold">গড়</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {data.markets.map((market, index) => {
-                const marketAverage = (market.min + market.max) / 2;
-
-                return (
-                  <tr
-                    key={index}
-                    className={`border-t border-[#dce6dd] ${
-                      index % 2 === 1 ? "bg-[#f0f5f0]" : "bg-[#f9fcf9]"
-                    }`}
-                  >
-                    <td className="px-5 py-4 font-medium text-[#202820]">
-                      {market.market}
-                    </td>
-
-                    <td className="px-5 py-4 text-[#202820]">
-                      {market.division}
-                    </td>
-
-                    <td className="px-5 py-4 text-right text-[#202820]">
-                      {toBnDigit(market.min)} টাকা
-                    </td>
-
-                    <td className="px-5 py-4 text-right text-[#202820]">
-                      {toBnDigit(market.max)} টাকা
-                    </td>
-
-                    <td className="px-5 py-4 text-right font-bold text-[#202820]">
-                      {toBnDigit(marketAverage.toFixed(2))} টাকা
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-*/}
-
-<div>
-      {/* =========================================
-          1. MOBILE VIEW (Cards - Below 'md' screen)
-          ========================================= */}
-      <div className="grid grid-cols-1 gap-3 md:hidden">
-        {data.markets.map((market, index) => {
-          const marketAverage = (market.min + market.max) / 2;
-
-          return (
-            <div
-              key={index}
-              className="rounded-2xl border border-[#dce6dd] bg-white p-4 shadow-sm"
-            >
-              {/* Header: Market Name & Division */}
-              <div className="flex items-start justify-between border-b border-[#edf3ed] pb-2.5">
-                <div>
-                  <h4 className="font-bold text-[#202820] text-base">
-                    {market.market}
-                  </h4>
-                  <p className="text-xs text-[#737c74] mt-0.5">
-                    {market.division} বিভাগ
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="text-[11px] font-medium text-[#737c74] block">
-                    গড় দাম
-                  </span>
-                  <span className="font-bold text-sm text-[#185329]">
-                    {toBnDigit(marketAverage.toFixed(2))} টাকা
-                  </span>
-                </div>
-              </div>
-
-              {/* Price Range Details */}
-              <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                <div className="rounded-xl bg-[#f9fcf9] p-2.5 border border-[#edf3ed]">
-                  <span className="text-[#737c74] block mb-0.5">সর্বনিম্ন</span>
-                  <span className="font-semibold text-[#202820]">
-                    {toBnDigit(market.min)} টাকা
-                  </span>
-                </div>
-                <div className="rounded-xl bg-[#f9fcf9] p-2.5 border border-[#edf3ed]">
-                  <span className="text-[#737c74] block mb-0.5">সর্বাধিক</span>
-                  <span className="font-semibold text-[#202820]">
-                    {toBnDigit(market.max)} টাকা
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* =======================================================
-          2. TABLET & LAPTOP VIEW (Table - 'md' and larger screens)
-          ======================================================= */}
-      <div className="hidden md:block overflow-x-auto rounded-[20px] border border-[#dce6dd] bg-white shadow-sm">
-        <table className="w-full border-collapse text-left text-sm lg:text-base">
-          <thead className="bg-[#f9fcf9] text-[#737c74] border-b border-[#dce6dd]">
-            <tr>
-              <th className="px-4 py-3.5 lg:px-6 lg:py-4 font-bold">বাজার</th>
-              <th className="px-4 py-3.5 lg:px-6 lg:py-4 font-bold">বিভাগ</th>
-              <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">সর্বনিম্ন</th>
-              <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">সর্বাধিক</th>
-              <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">গড়</th>
-            </tr>
-          </thead>
-
-          <tbody className="divide-y divide-[#dce6dd]">
+        {/* table for market data */}
+        <div>
+          {/*
+          for mobileview */}
+          <div className="grid grid-cols-1 gap-3 md:hidden">
             {data.markets.map((market, index) => {
               const marketAverage = (market.min + market.max) / 2;
 
               return (
-                <tr
+                <div
                   key={index}
-                  className={`transition-colors hover:bg-[#eaf1eb]/50 ${
-                    index % 2 === 1 ? "bg-[#f4f8f4]" : "bg-white"
-                  }`}
+                  className="rounded-2xl border border-[#dce6dd] bg-white p-4 shadow-sm"
                 >
-                  <td className="px-4 py-3.5 lg:px-6 lg:py-4 font-medium text-[#202820] whitespace-nowrap">
-                    {market.market}
-                  </td>
+                  {/* Header: Market Name & Division */}
+                  <div className="flex items-start justify-between border-b border-[#edf3ed] pb-2.5">
+                    <div>
+                      <h4 className="font-bold text-[#202820] text-base">
+                        {market.market}
+                      </h4>
+                      <p className="text-xs text-[#737c74] mt-0.5">
+                        {market.division} বিভাগ
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[11px] font-medium text-[#737c74] block">
+                        গড় দাম
+                      </span>
+                      <span className="font-bold text-sm text-[#185329]">
+                        {toBnDigit(marketAverage.toFixed(2))} টাকা
+                      </span>
+                    </div>
+                  </div>
 
-                  <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-[#4b554c] whitespace-nowrap">
-                    {market.division}
-                  </td>
-
-                  <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right text-[#202820] whitespace-nowrap">
-                    {toBnDigit(market.min)} টাকা
-                  </td>
-
-                  <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right text-[#202820] whitespace-nowrap">
-                    {toBnDigit(market.max)} টাকা
-                  </td>
-
-                  <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold text-[#185329] whitespace-nowrap">
-                    {toBnDigit(marketAverage.toFixed(2))} টাকা
-                  </td>
-                </tr>
+                  {/* Price Range Details */}
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    <div className="rounded-xl bg-[#f9fcf9] p-2.5 border border-[#edf3ed]">
+                      <span className="text-[#737c74] block mb-0.5">সর্বনিম্ন</span>
+                      <span className="font-semibold text-[#202820]">
+                        {toBnDigit(market.min)} টাকা
+                      </span>
+                    </div>
+                    <div className="rounded-xl bg-[#f9fcf9] p-2.5 border border-[#edf3ed]">
+                      <span className="text-[#737c74] block mb-0.5">সর্বাধিক</span>
+                      <span className="font-semibold text-[#202820]">
+                        {toBnDigit(market.max)} টাকা
+                      </span>
+                    </div>
+                  </div>
+                </div>
               );
             })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </div>
+
+          {/*
+          for tablet latptop
+        */}
+          <div className="hidden md:block overflow-x-auto rounded-[20px] border border-[#dce6dd] bg-white shadow-sm">
+            <table className="w-full border-collapse text-left text-sm lg:text-base">
+              <thead className="bg-[#f9fcf9] text-[#737c74] border-b border-[#dce6dd]">
+                <tr>
+                  <th className="px-4 py-3.5 lg:px-6 lg:py-4 font-bold">বাজার</th>
+                  <th className="px-4 py-3.5 lg:px-6 lg:py-4 font-bold">বিভাগ</th>
+                  <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">সর্বনিম্ন</th>
+                  <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">সর্বাধিক</th>
+                  <th className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold">গড়</th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-[#dce6dd]">
+                {data.markets.map((market, index) => {
+                  const marketAverage = (market.min + market.max) / 2;
+
+                  return (
+                    <tr
+                      key={index}
+                      className={`transition-colors hover:bg-[#eaf1eb]/50 ${index % 2 === 1 ? "bg-[#f4f8f4]" : "bg-white"
+                        }`}
+                    >
+                      <td className="px-4 py-3.5 lg:px-6 lg:py-4 font-medium text-[#202820] whitespace-nowrap">
+                        {market.market}
+                      </td>
+
+                      <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-[#4b554c] whitespace-nowrap">
+                        {market.division}
+                      </td>
+
+                      <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right text-[#202820] whitespace-nowrap">
+                        {toBnDigit(market.min)} টাকা
+                      </td>
+
+                      <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right text-[#202820] whitespace-nowrap">
+                        {toBnDigit(market.max)} টাকা
+                      </td>
+
+                      <td className="px-4 py-3.5 lg:px-6 lg:py-4 text-right font-bold text-[#185329] whitespace-nowrap">
+                        {toBnDigit(marketAverage.toFixed(2))} টাকা
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
       </section>
     </div>
