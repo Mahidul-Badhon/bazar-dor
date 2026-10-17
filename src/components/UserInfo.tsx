@@ -16,18 +16,42 @@ const UserInfo = () => {
         <div>
             {
                 user ? (<div>
-                    <div className="avatar">
-                        <div className="w-10 h-10 rounded-full">
-                            <Image width={10} height={10} alt={user?.name || "Tailwind-CSS-Avatar-component"}
-                                src={user?.image || "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"}
-                                onError={(e) => {
-                                    // If the link is broken, replace it with default image
-                                    e.currentTarget.src = "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp";
-                                }} />
-                        </div>
-                    </div>
-                    <h2>{user?.name}</h2>
-                    <button onClick={handleSignOut} className='btn mx-1.5 bg-green-500 text-white'>সাইন আউট</button>
+
+
+                    <ul className="menu rounded-box">
+                        <li>
+                            <details open>
+                                <summary className='flex gap-2 items-center'>
+                                    <div className="avatar">
+                                        <div className="w-13 h-13 rounded-full">
+                                            <Image width={13} height={13} alt={user?.name || "Tailwind-CSS-Avatar-component"}
+                                                src={user?.image || "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"}
+                                                onError={(e) => {
+                                                    // If the link is broken, replace it with default image
+                                                    e.currentTarget.src = "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp";
+                                                }} />
+                                        </div>
+                                    </div>
+                                    <h2>{user?.name}</h2>
+                                </summary>
+                                <ul>
+                                    <li>
+                                        <Link href={"/profile"} className='font-semibold text-black'>
+                                            প্রোফাইল
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleSignOut} className='font-semibold text-black border-0'>সাইন আউট</button>
+                                    </li>
+                                </ul>
+                            </details>
+
+                        </li>
+                    </ul>
+
+
+
+
 
                 </div>
                 )

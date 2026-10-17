@@ -1,12 +1,15 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const ProfilePage = () => {
     const {data: session} = authClient.useSession()
     const user = session?.user
     // console.log(user)
+
+    const router = useRouter()
 
     const handleOnSubmit = async(e:React.SubmitEvent<HTMLElement>) => {
         e.preventDefault()
@@ -18,6 +21,18 @@ const ProfilePage = () => {
             ...newUserData
         })
     }
+
+    const handleSignOut = async () => {
+            await authClient.signOut({
+                fetchOptions:{
+                onSuccess:() =>{
+                    router.push("/signIn");
+                    router.refresh()
+                }
+            }
+            });
+            
+        }
     
     return (
         <div>
@@ -50,7 +65,7 @@ const ProfilePage = () => {
 
                 {/* button */}
                 <div>
-                    <button className='border border-red-500 text-red-600 p-3 rounded-2xl'>↩ সাইন আউট</button>
+                    <button onClick={handleSignOut} className='border border-red-500 text-red-600 p-3 rounded-2xl'>↩ সাইন আউট</button>
                 </div>
             </section>
 
