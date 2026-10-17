@@ -2,15 +2,24 @@
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { use } from 'react';
 
 const UserInfo = () => {
     const { data: session } = authClient.useSession()
     const user = session?.user
     // console.log(user)
+    const router = useRouter()
 
     const handleSignOut = async () => {
-        await authClient.signOut();
+        await authClient.signOut({
+                fetchOptions:{
+                onSuccess:() =>{
+                    router.push("/signIn");
+                    router.refresh()
+                }
+            }
+            });
     }
     return (
         <div>
@@ -20,7 +29,7 @@ const UserInfo = () => {
 
                     <ul className="menu rounded-box">
                         <li>
-                            <details open>
+                            <details>
                                 <summary className='flex gap-2 items-center'>
                                     <div className="avatar">
                                         <div className="w-13 h-13 rounded-full">

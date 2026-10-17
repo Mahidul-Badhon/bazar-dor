@@ -2,6 +2,7 @@
 import upIcon from "@/assets/triangle (1).png";
 import down from "@/assets/down-arrows.png";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 interface Market {
   market: string;
@@ -60,10 +61,14 @@ const Productpage = async ({ params }: ProductPageProps) => {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch product");
+    notFound()
   }
 
   const data: Product = await res.json();
+
+  if(!data){
+    notFound()
+  }
 
   const priceDifference = data.today - data.yesterday;
   const priceWentUp = data.change.dir === "up";
@@ -86,7 +91,7 @@ const Productpage = async ({ params }: ProductPageProps) => {
       <div className="flex flex-col items-center justify-between gap-5 rounded-[28px] border border-[#dce6dd] bg-[#f9fcf9] p-5 text-[#202820] sm:flex-row sm:p-8">
         {/* Product details */}
         <div className="flex w-full items-center gap-5 sm:gap-7">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] bg-[#f0f5f0] text-4xl sm:h-[100px] sm:w-[100px] sm:text-5xl">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-[#f0f5f0] text-4xl sm:h-[100px] sm:w-[100px] sm:text-5xl">
             {data.image}
           </div>
 
@@ -111,7 +116,7 @@ const Productpage = async ({ params }: ProductPageProps) => {
         </div>
 
         {/* Today's price */}
-        <div className="flex w-full shrink-0 flex-col items-center justify-center rounded-[24px] bg-[#f0f5f0] px-5 py-4 sm:w-[190px]">
+        <div className="flex w-full shrink-0 flex-col items-center justify-center rounded-3xl bg-[#f0f5f0] px-5 py-4 sm:w-47.5">
           <p className="text-lg text-[#737c74]">আজকের দাম</p>
 
           <h3 className="mt-1 text-4xl font-extrabold">
@@ -138,7 +143,7 @@ const Productpage = async ({ params }: ProductPageProps) => {
       </div>
 
       {/* Price summary section */}
-      <section className="mt-6 rounded-[24px] border border-[#dce6dd] bg-[#f9fcf9] p-4 sm:p-6">
+      <section className="mt-6 rounded-3xl border border-[#dce6dd] bg-[#f9fcf9] p-4 sm:p-6">
         <h2 className="mb-5 text-xl font-extrabold text-[#202820]">
           দামের সারসংক্ষেপ
         </h2>

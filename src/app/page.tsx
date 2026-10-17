@@ -1,13 +1,41 @@
 import Banner from "@/components/Banner";
-import Marquee from "@/components/Marquee";
 import Image from "next/image";
 import up from "@/assets/triangle (1).png"
 import down from "@/assets/down-arrows.png"
 import ProductsCard from "@/components/ProductsCard";
 
+interface Market {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
+}
+
+interface ProductChange {
+  dir: "up" | "down" | string;
+  pct: number;
+}
+
+interface Product {
+  id: number;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: ProductChange;
+  markets?: Market[];
+}
+
 export default async function Home() {
   const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products")
-  const data = await res.json()
+  const data:Product[] = await res.json()
   // console.log(data)
 
   const topRisenProducts = data
@@ -62,7 +90,7 @@ export default async function Home() {
         </div> 
 
         {/* all products    */}
-        <div className="mt-8 container mx-auto">
+        <div id="allProduct" className=" mt-8 container mx-auto">
           <div className="grid items-center gap-2">
             <h2 className="font-extrabold text-2xl">সব পণ্য</h2>
             <p className="text-gray-400">মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>

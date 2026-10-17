@@ -1,6 +1,6 @@
 
 import SortedProducts from '@/components/SortedProducts';
-import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -31,10 +31,16 @@ const toBnDigit = (num: number | string): string => {
 const CategoryProducts = async({params}:{params: {categoryId:string}}) => {
     const {categoryId} = await params
     const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`)
+    if(!res.ok){
+        notFound()
+    }
     const data: Product[] = await res.json()
-    const category = data[0]
-    console.log(data)
     
+    const category = data[0]
+    // console.log(data)
+    if(!category){
+        notFound()
+    }
 
 
     return (
