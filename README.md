@@ -16,4 +16,4 @@
 * Sorting Products: Products can be sort based on the price
 * Division & Market-Wise Price Comparison: Interactive, fully responsive tables and mobile cards comparing minimum, maximum, and average commodity prices across major markets in different divisions.
 * Category-Based Filtering, Marquee animation, Dynamic Routing: Dedicated dynamic routing (/category/[categoryId]), marquee style based products, and integrated notFound() handling for invalid routes.
-* Secure Authentication & Profile Management: Multi-provider authentication (Google, GitHub, credentials) powered by Better Auth, protected routes via Next.js middleware, and real-time profile name updates.
+* Secure Authentication & Profile Management: Multi-provider authentication (Google, GitHub, credentials) powered by Better Auth, protected routes via Next.js middleware, and real-time profile name updates and used necessary toast/notifications.
