@@ -11,6 +11,7 @@ interface Product {
   categoryIcon: string;
   today: number;
   image:string;
+  unit:string;
   yesterday: number;
   lastWeek: number;
   lastMonth: number;

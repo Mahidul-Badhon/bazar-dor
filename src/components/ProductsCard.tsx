@@ -4,16 +4,49 @@ import upIcon from "@/assets/triangle (1).png";
 import down from "@/assets/down-arrows.png"
 import Link from "next/link";
 
-const toBnDigit = (num: string) => {
+export interface ProductChange {
+  dir: "up" | "down" | string;
+  pct: number;
+}
+
+export interface Market {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
+}
+
+export interface Product {
+  id: number;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change?: ProductChange;
+  markets?: Market[];
+}
+
+interface ProductsCardProps {
+  product: Product;
+}
+
+const toBnDigit = (num: number | string):string => {
   const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   return num
     ?.toString()
-    .replace(/[0-9]/g, (d) => bnDigits[parseInt(d, 10)]);
+    .replace(/[0-9]/g, (d) => bnDigits[parseInt(d, 10)] ?? "");
 };
 
-const ProductsCard = ({ product }) => {
+const ProductsCard : React.FC<ProductsCardProps> = ({ product }) => {
   // Unit formatting helper for Bengali text
-  const formatUnit = (unit) => {
+  const formatUnit = (unit: string ): string => {
     if (unit === "kg") return "প্রতি কেজি";
     if (unit === "dozen") return "প্রতি ডজন";
     if (unit === "piece" || unit === "pcs") return "প্রতি পিস";
