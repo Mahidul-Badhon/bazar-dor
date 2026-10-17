@@ -1,5 +1,6 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { use } from 'react';
 
@@ -16,9 +17,13 @@ const UserInfo = () => {
             {
                 user ? (<div>
                     <div className="avatar">
-                        <div className="w-10 rounded-full">
-                            <img alt="Tailwind-CSS-Avatar-component"
-                                src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
+                        <div className="w-10 h-10 rounded-full">
+                            <Image width={10} height={10} alt={user?.name || "Tailwind-CSS-Avatar-component"}
+                                src={user?.image || "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"}
+                                onError={(e) => {
+                                    // If the link is broken, replace it with default image
+                                    e.currentTarget.src = "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp";
+                                }} />
                         </div>
                     </div>
                     <h2>{user?.name}</h2>
