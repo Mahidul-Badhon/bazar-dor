@@ -7,60 +7,76 @@ import { toast } from 'react-toastify';
 
 const SignUpPage = () => {
 
-    const handleOnSubmit = async (e: React.SubmitEvent<HTMLElement>) =>{
+    const handleOnSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        const user = Object.fromEntries(formData.entries()) as{name: string;
-      email: string;
-      password: string;
-      confirmPassword: string;
-    }
+        const user = Object.fromEntries(formData.entries()) as {
+            name: string;
+            email: string;
+            password: string;
+            confirmPassword: string;
+        }
         // console.log(user)
 
         const { name, email, password, confirmPassword } = user as {
-      name: string;
-      email: string;
-      password: string;
-      confirmPassword: string;
-    }
-    if(password.length < 8){
-        toast.error("password is too small!")
-        return
-    }
-    if(password !== confirmPassword){
-        toast.error("Enter the password again!")
-        return
-    }
-
-    const {data, error} = await authClient.signUp.email(
-        {
-            ...user,
-            callbackURL: "/"
+            name: string;
+            email: string;
+            password: string;
+            confirmPassword: string;
         }
-    )
-    if( data){
-        toast.success("Signed Up Successfully!")
-        redirect("/")
-    }
-    if(error){
-        toast.error("something went wrong!")
-    }
+        if (password.length < 8) {
+            toast.error("password is too small!")
+            return
+        }
+        if (password !== confirmPassword) {
+            toast.error("Enter the password again!")
+            return
+        }
+
+        const { data, error } = await authClient.signUp.email(
+            {
+                ...user,
+                callbackURL: "/"
+            }
+        )
+        if (data) {
+            toast.success("Signed Up Successfully!")
+            redirect("/")
+        }
+        if (error) {
+            toast.error("something went wrong!")
+        }
 
     }
 
     const handleGoogleSignUp = async () => {
-            const data = await authClient.signIn.social({
-                provider: "google",
-            });
-    
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+
+        if (data) {
+            toast.success("signed in successfully!")
         }
-    
-        const handleGithubSignUp = async () => {
-            const data = await authClient.signIn.social({
-                provider: "github",
-            });
-    
+        else {
+            toast.error("something went wrong!")
         }
+
+    }
+
+    const handleGithubSignUp = async () => {
+        const data = await authClient.signIn.social({
+            provider: "github",
+        });
+
+        if (data) {
+            toast.success("signed in successfully!")
+        }
+        else {
+            toast.error("something went wrong!")
+        }
+
+
+    }
 
     return (
         <div className="min-h-screen py-10 px-4 flex flex-col justify-center items-center">

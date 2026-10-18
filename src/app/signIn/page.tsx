@@ -35,12 +35,26 @@ const SignInPage = () => {
             provider: "google",
         });
 
+        if (data) {
+            toast.success("signed in successfully!")
+        }
+        else {
+            toast.error("something went wrong!")
+        }
+
     }
 
     const handleGithubSignIn = async () => {
         const data = await authClient.signIn.social({
             provider: "github",
         });
+        if (data) {
+            toast.success("signed in successfully!")
+        }
+        else {
+            toast.error("something went wrong!")
+        }
+
 
     }
 
