@@ -3,6 +3,7 @@ import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
     const {data: session} = authClient.useSession()
@@ -28,6 +29,7 @@ const ProfilePage = () => {
                 onSuccess:() =>{
                     router.push("/signIn");
                     router.refresh()
+                    toast.success("signed out successfully!")
                 }
             }
             });

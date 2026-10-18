@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { use } from 'react';
+import { toast } from 'react-toastify';
 
 const UserInfo = () => {
     const { data: session } = authClient.useSession()
@@ -16,7 +17,9 @@ const UserInfo = () => {
                 fetchOptions:{
                 onSuccess:() =>{
                     router.push("/signIn");
+                    
                     router.refresh()
+                    toast.success("signed out successfully!")
                 }
             }
             });
